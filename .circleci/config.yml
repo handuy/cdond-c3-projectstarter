@@ -18,7 +18,7 @@ commands:
     parameters:
       # Add parameter here     
     steps:
-      - run=9    
+      - run:    
           name: Revert migrations
           # Add when this will run
           command: |
