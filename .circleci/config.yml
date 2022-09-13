@@ -35,7 +35,7 @@ version: 2.1
 jobs:
   build-frontend:
     docker:
-      - image: cimg/node:18.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -52,7 +52,7 @@ jobs:
 
   build-backend:
     docker:
-      - image: cimg/node:18.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -69,7 +69,7 @@ jobs:
 
   test-frontend:
     docker:
-      - image: cimg/node:18.8.0
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - checkout
@@ -86,7 +86,7 @@ jobs:
                 
   test-backend:
     docker:
-      - image: cimg/node:18.8.0
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - checkout
@@ -103,7 +103,7 @@ jobs:
             
   scan-frontend:
     docker:
-      - image: cimg/node:18.8.0
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - checkout
@@ -116,12 +116,12 @@ jobs:
           command: |
             cd frontend
             npm install
-            npm audit fix --audit-level=critical --force
+            npm audit fix --audit-level=critical
             npm audit --audit-level=critical
 
   scan-backend:
     docker:
-      - image: cimg/node:18.8.0
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - checkout
@@ -134,7 +134,7 @@ jobs:
           command: |
             cd backend
             npm install
-            npm audit fix --audit-level=critical --force
+            npm audit fix --audit-level=critical
             npm audit --audit-level=critical
 
 #   deploy-infrastructure:
