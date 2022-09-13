@@ -38,34 +38,34 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - restore_cache:
-          keys: [frontend-build]
+      # - restore_cache:
+      #     keys: [frontend-build]
       - run:
           name: Build front-end
           command: |
             cd frontend
             npm install
             npm run build
-      - save_cache:
-          paths: [frontend/node_modules]
-          key: frontend-build
+      # - save_cache:
+      #     paths: [frontend/node_modules]
+      #     key: frontend-build
 
   build-backend:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - restore_cache:
-          keys: [backend-build]
+      # - restore_cache:
+      #     keys: [backend-build]
       - run:
           name: Back-end build
           command: |
             cd backend
             npm install
             npm run build
-      - save_cache:
-          paths: [backend/node_modules]
-          key: backend-build
+      # - save_cache:
+      #     paths: [backend/node_modules]
+      #     key: backend-build
 
   test-frontend:
     docker:
@@ -74,8 +74,8 @@ jobs:
       # Checkout code from git
       - checkout
       # Restore from cache
-      - restore_cache:
-          keys: [frontend-build]
+      # - restore_cache:
+      #     keys: [frontend-build]
       # Your job code here
       - run:
           name: Front-end test
@@ -91,8 +91,8 @@ jobs:
       # Checkout code from git
       - checkout
       # Restore from cache
-      - restore_cache:
-          keys: [backend-build]
+      # - restore_cache:
+      #     keys: [backend-build]
       # Your job code here
       - run:
           name: Back-end test
@@ -108,15 +108,15 @@ jobs:
       # Checkout code from git
       - checkout
       # Restore from cache
-      - restore_cache:
-          keys: [frontend-build]
+      # - restore_cache:
+      #     keys: [frontend-build]
       # Your job code here
       - run:
           name: Front-end test
           command: |
             cd frontend
             npm install
-            npm audit fix --audit-level=critical
+            npm audit fix --audit-level=critical --force
             npm audit --audit-level=critical
 
   scan-backend:
@@ -126,15 +126,15 @@ jobs:
       # Checkout code from git
       - checkout
       # Restore from cache
-      - restore_cache:
-          keys: [backend-build]
+      # - restore_cache:
+      #     keys: [backend-build]
       # Your job code here
       - run:
           name: Back-end test
           command: |
             cd backend
             npm install
-            npm audit fix --audit-level=critical
+            npm audit fix --audit-level=critical --force
             npm audit --audit-level=critical
 
 #   deploy-infrastructure:
