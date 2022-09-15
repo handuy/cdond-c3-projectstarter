@@ -208,6 +208,7 @@ jobs:
               ls -la
               ls -la /tmp/workspace
               ls -la /tmp/workspace/project/.circleci/ansible
+              cat /tmp/workspace/project/.circleci/ansible/inventory.txt
       # - run:
       #     name: Install dependencies
       #     command: |
@@ -218,7 +219,7 @@ jobs:
           command: |
             # Your code here
               cd .circleci/ansible
-              ansible-playbook -i /tmp/workspace/inventory.txt configure-server.yml
+              ansible-playbook -i /tmp/workspace/project/.circleci/ansible/inventory.txt configure-server.yml
       # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
