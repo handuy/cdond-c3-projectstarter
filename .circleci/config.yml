@@ -149,6 +149,8 @@ jobs:
           name: Install tar utility
           command: |
             yum install -y tar gzip
+            echo ~
+            ls -la ~
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -176,7 +178,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/.circleci/ansible/inventory.txt
+            - .circleci/ansible/inventory.txt
       - destroy-environment
           
      
@@ -198,13 +200,13 @@ jobs:
       # attach workspace
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
+          at: ~/.circleci/ansible
       - run:
           name: Check dir
           command: |
               pwd
               ls -la
-              ls -la /tmp/workspace
+              ls -la ~/.circleci/ansible
       # - run:
       #     name: Install dependencies
       #     command: |
@@ -215,7 +217,7 @@ jobs:
           command: |
             # Your code here
               cd .circleci/ansible
-              ansible-playbook -i /tmp/workspace/inventory.txt configure-server.yml
+              ansible-playbook -i ~/.circleci/ansible/inventory.txt configure-server.yml
       # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
