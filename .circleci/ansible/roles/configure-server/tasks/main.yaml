@@ -11,4 +11,4 @@
     - apt install -y nodejs
     - node -v
     - apt install -y build-essential
-    - npm install pm2@latest -g
+    - curl -sL https://raw.githubusercontent.com/Unitech/pm2/master/packager/setup.deb.sh | bash -
