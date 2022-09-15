@@ -5,7 +5,6 @@
 - name: Install nodejs, npm, and pm2.
   ansible.builtin.command: "{{ item }}"
   with_items:
-    - cd
     - curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
     - bash nodesource_setup.sh
     - apt install -y nodejs
