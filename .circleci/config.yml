@@ -183,27 +183,39 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: circleci/python:3.6.2
+      - image: handuy1992/ubuntu_ansible
     steps:
       - run:
-          name: Install Dependencies
+          name: Check Dependencies
           command: |
-              python3 -m pip -V
-              python3 -m pip install --user ansible
               ansible --version
       # Checkout code from git
+      - checkout
       # Add ssh keys with fingerprint
+      - add_ssh_keys:
+          fingerprints:
+            - "74:98:3c:ae:1d:60:11:7f:24:38:9b:5f:d2:84:cb:66"
       # attach workspace
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+      - run:
+          name: Check dir
+          command: |
+              pwd
+              ls -la
+              ls -la /tmp/workspace
       # - run:
       #     name: Install dependencies
       #     command: |
       #       # Your code here
       #       exit 1
-      # - run:
-      #     name: Configure server
-      #     command: |
-      #       # Your code here
-      #       exit 1
+      - run:
+          name: Configure server
+          command: |
+            # Your code here
+              cd .circleci/ansible
+              ansible-playbook -i /tmp/workspace/inventory.txt configure-server.yml
       # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
