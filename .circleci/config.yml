@@ -259,12 +259,12 @@ jobs:
     steps:
       # Checkout code from git
       - checkout
-      - attach_workspace:
-          at: /tmp/workspace
       - run:
           name: Install dependencies
           command: |
             sudo yum update -y
+
+            yum install -y tar gzip
             
             curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
             sudo yum install -y nodejs
@@ -273,6 +273,8 @@ jobs:
 
             sudo yum install -y epel-release
             sudo yum install -y ansible
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: Get backend url
           command: |
@@ -301,13 +303,16 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "74:98:3c:ae:1d:60:11:7f:24:38:9b:5f:d2:84:cb:66"
-      - attach_workspace:
-          at: /tmp/workspace
       - run:
           name: Install dependencies
           command: |
-            # your code here
-
+            yum update -y
+            yum install -y tar gzip
+            curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+            bash nodesource_setup.sh
+            apt install -y nodejs
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: Deploy backend
           command: |
