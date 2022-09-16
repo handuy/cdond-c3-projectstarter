@@ -262,17 +262,17 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            sudo yum update -y
+            yum update -y
 
             yum install -y tar gzip
             
-            curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
-            sudo yum install -y nodejs
+            curl -sL https://rpm.nodesource.com/setup_10.x | bash -
+            yum install -y nodejs
             
-            sudo yum install -y python3
+            yum install -y python3
 
-            sudo yum install -y epel-release
-            sudo yum install -y ansible
+            yum install -y epel-release
+            yum install -y ansible
       - attach_workspace:
           at: /tmp/workspace
       - run:
@@ -306,8 +306,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum update -y
-            yum install -y tar gzip
+            apt update -y
             curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
             bash nodesource_setup.sh
             apt install -y nodejs
