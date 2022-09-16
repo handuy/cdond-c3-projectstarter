@@ -141,16 +141,10 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      - image: amazon/aws-cli
+      - image: handuy1992/full_package
     steps:
       # Checkout code from git
       - checkout
-      - run:
-          name: Install tar utility
-          command: |
-            yum install -y tar gzip
-            echo ~
-            ls -la ~
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -192,7 +186,7 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: handuy1992/ubuntu_ansible
+      - image: handuy1992/full_package
     steps:
       - run:
           name: Check Dependencies
@@ -228,11 +222,11 @@ jobs:
               cd .circleci/ansible
               ansible-playbook -i /tmp/workspace/project/.circleci/ansible/inventory.txt configure-server.yml
       # Here's where you will add some code to rollback on failure  
-      # - destroy-environment    
+      - destroy-environment    
 
   run-migrations:
     docker:
-      - image: circleci/node:13.8.0
+      - image: handuy1992/full_package
     steps:
       # Checkout code from git
       - checkout
@@ -251,28 +245,14 @@ jobs:
             then
                 curl -k https://kvdb.io/6fdS3b1Wb2tyH4zSW1csbk/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
-     # Here's where you will add some code to rollback on failure      
+      - destroy-environment           
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli
+      - image: handuy1992/full_package
     steps:
       # Checkout code from git
       - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            yum update -y
-
-            yum install -y tar gzip
-            
-            curl -sL https://rpm.nodesource.com/setup_10.x | bash -
-            yum install -y nodejs
-            
-            yum install -y python3
-
-            yum install -y epel-release
-            yum install -y ansible
       - attach_workspace:
           at: /tmp/workspace
       - run:
@@ -296,20 +276,13 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: handuy1992/ubuntu_ansible
+      - image: handuy1992/full_package
     steps:
       # Checkout code from git
       - checkout
       - add_ssh_keys:
           fingerprints:
             - "74:98:3c:ae:1d:60:11:7f:24:38:9b:5f:d2:84:cb:66"
-      - run:
-          name: Install dependencies
-          command: |
-            apt update -y
-            curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
-            bash nodesource_setup.sh
-            apt install -y nodejs
       - attach_workspace:
           at: /tmp/workspace
       - run:
@@ -326,6 +299,7 @@ jobs:
             cat /tmp/workspace/project/.circleci/ansible/inventory.txt
             ansible-playbook -i /tmp/workspace/project/.circleci/ansible/inventory.txt deploy-backend.yml
       # Here's where you will add some code to rollback on failure  
+      - destroy-environment
 
 #   smoke-test:
 #     docker:
