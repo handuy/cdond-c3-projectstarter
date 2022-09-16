@@ -1,0 +1,15 @@
+- name: Extract tar file to server
+  unarchive:
+    src: /root/project/artifact.tar.gz
+    dest: /home/ubuntu
+
+- name: Install nodejs, npm, and pm2.
+  ansible.builtin.command: "{{ item }}"
+  with_items:
+    - curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+    - bash nodesource_setup.sh
+    - apt install -y nodejs
+    - node -v
+    - apt install -y build-essential
+    - npm install pm2 -g
+    # - curl -sL https://raw.githubusercontent.com/Unitech/pm2/master/packager/setup.deb.sh | bash -
