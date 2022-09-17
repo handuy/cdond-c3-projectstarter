@@ -258,7 +258,12 @@ jobs:
       - run:
           name: Get backend url
           command: |
-            export BACKEND_IP=$(cat /tmp/workspace/project/.circleci/ansible/inventory.txt)
+            export BACKEND_IP=$(aws ec2 describe-instances \
+              --filters \
+              "Name=instance-state-name,Values=running" \
+              --query 'Reservations[*].Instances[*].[PublicIpAddress]' \
+              --output text)
+
             export API_URL="http://${BACKEND_IP}:3030"
             echo "API_URL = ${API_URL}"
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
@@ -311,8 +316,13 @@ jobs:
           at: /tmp/workspace
       - run:
           name: Backend smoke test.
-          command: |
-            export BACKEND_IP=$(cat /tmp/workspace/project/.circleci/ansible/inventory.txt)
+          command: |            
+            export BACKEND_IP=$(aws ec2 describe-instances \
+              --filters \
+              "Name=instance-state-name,Values=running" \
+              --query 'Reservations[*].Instances[*].[PublicIpAddress]' \
+              --output text)
+
             export API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
             if curl "${API_URL}/api/status" | grep "ok"
