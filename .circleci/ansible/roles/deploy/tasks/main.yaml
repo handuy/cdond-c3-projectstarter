@@ -6,7 +6,7 @@
 - name: npm install
   command: npm install
 
-# - name: pm2 stop default
+# - name: echo 
 #   command: pm2 stop default
 
 - name: pm2 start npm -- start
