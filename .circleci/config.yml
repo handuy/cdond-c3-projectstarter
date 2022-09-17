@@ -327,7 +327,11 @@ jobs:
           at: /tmp/workspace
       - run:
           name: Backend smoke test.
-          command: |            
+          command: |   
+            env
+            env >> test.txt
+            cat test.txt
+                     
             export BACKEND_IP=$(aws ec2 describe-instances \
               --filters \
               "Name=instance-state-name,Values=running" \

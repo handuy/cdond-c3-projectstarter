@@ -3,7 +3,7 @@
     update_cache: yes
 
 - name: echo env
-  command: env && env >> test.txt && cat test.txt
+  command: env
 
 - name: Install nodejs, npm, and pm2.
   ansible.builtin.command: "{{ item }}"
