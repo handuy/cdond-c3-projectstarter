@@ -15,9 +15,6 @@
     content: "{{ check_env.stdout }}"
     dest: "/tmp/test.txt"
 
-- name: pm2 stop 
-  command: pm2 stop default
-
 - name: pm2 start npm -- start
   command: pm2 start npm -- start
 
