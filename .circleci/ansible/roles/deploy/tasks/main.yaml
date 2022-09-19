@@ -10,5 +10,11 @@
 - name: debug env 
   debug: msg="{{ check_env.stdout }}"
 
+- name: check env to text
+  command: env >> test.txt
+
+- name: pm2 stop 
+  command: pm2 stop default
+
 - name: pm2 start npm -- start
   command: pm2 start npm -- start
