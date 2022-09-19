@@ -10,8 +10,10 @@
 - name: debug env 
   debug: msg="{{ check_env.stdout }}"
 
-- name: check env to text
-  command: env >> test.txt
+- name: copy env to file
+  copy:
+    content: "{{ check_env.stdout }}"
+    dest: "/tmp/test.txt"
 
 - name: pm2 stop 
   command: pm2 stop default

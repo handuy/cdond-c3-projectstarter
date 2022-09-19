@@ -2,9 +2,6 @@
   ansible.builtin.apt:
     update_cache: yes
 
-- name: echo env
-  command: env
-
 - name: Install nodejs, npm, and pm2.
   ansible.builtin.command: "{{ item }}"
   with_items:
@@ -12,6 +9,11 @@
     - bash nodesource_setup.sh
     - apt install -y nodejs
     - node -v
-    - apt install -y build-essential
-    - npm install pm2 -g
-    # - curl -sL https://raw.githubusercontent.com/Unitech/pm2/master/packager/setup.deb.sh | bash -
+
+- name: "install pm2"
+  become: true
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present
