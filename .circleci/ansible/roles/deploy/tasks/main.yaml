@@ -1,7 +1,7 @@
 - name: Extract tar file to server
   unarchive:
     src: /root/project/artifact.tar.gz
-    dest: /home/ubuntu
+    dest: ~/
 
 - name: check env
   command: env
