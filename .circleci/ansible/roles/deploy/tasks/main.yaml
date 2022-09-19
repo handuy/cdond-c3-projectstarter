@@ -20,6 +20,10 @@
 
 - name: pm2 start npm -- start
   command: pm2 start npm -- start
+  register: check_pm2
+
+- name: debug pm2
+  debug: msg="{{ check_pm2.stdout }}"
 
 - name: List all ports
   command: netstat -tulpn | grep LISTEN
