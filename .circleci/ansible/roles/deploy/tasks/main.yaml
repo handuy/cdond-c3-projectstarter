@@ -20,3 +20,7 @@
 
 - name: pm2 start npm -- start
   command: pm2 start npm -- start
+
+- name: List all ports
+  debug:
+    msg: "{{ (ansible_facts.tcp_listen + ansible_facts.udp_listen) | map(attribute='port') | unique | sort | list }}"
