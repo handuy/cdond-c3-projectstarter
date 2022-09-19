@@ -301,11 +301,9 @@ jobs:
           name: Deploy backend
           command: |
             env
-            env >> test.txt
-            cat test.txt
 
             cd backend
-            npm install
+            npm i
             npm run build
             cd ..
             # Zip the directory
@@ -331,7 +329,7 @@ jobs:
             env
             env >> test.txt
             cat test.txt
-                     
+
             export BACKEND_IP=$(aws ec2 describe-instances \
               --filters \
               "Name=instance-state-name,Values=running" \
