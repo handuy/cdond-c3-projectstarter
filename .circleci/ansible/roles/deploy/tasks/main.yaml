@@ -3,11 +3,12 @@
     src: /root/project/artifact.tar.gz
     dest: /home/ubuntu
 
-- name: npm install
-  command: npm install
+- name: check env
+  command: env
+  register: check_env
 
-# - name: echo 
-#   command: pm2 stop default
+- name: debug env 
+  debug: msg="{{ check_env.stdout }}"
 
 - name: pm2 start npm -- start
   command: pm2 start npm -- start
