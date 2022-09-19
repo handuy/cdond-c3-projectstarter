@@ -15,11 +15,14 @@
     content: "{{ check_env.stdout }}"
     dest: "/tmp/test.txt"
 
+- name: npm install
+  command: npm install
+
 - name: pm2 start npm -- start
   command: pm2 start npm -- start
 
 - name: List all ports
-  command: sudo netstat -tulpn | grep LISTEN
+  command: netstat -tulpn | grep LISTEN
   register: check_port
 
 - name: debug ports 
