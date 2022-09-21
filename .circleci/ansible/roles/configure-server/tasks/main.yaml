@@ -1,4 +1,7 @@
 - name: Update/upgrade packages
+  become: true
+  become_method: sudo
+  become_user: root  
   apt:
     update_cache: yes
 
