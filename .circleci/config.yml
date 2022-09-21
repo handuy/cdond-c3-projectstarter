@@ -144,7 +144,7 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      - image: handuy1992/new
+      - image: handuy1992/new:v1
     steps:
       # Checkout code from git
       - checkout
@@ -189,7 +189,7 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: handuy1992/new
+      - image: handuy1992/new:v1
     steps:
       - run:
           name: Check Dependencies
@@ -228,7 +228,7 @@ jobs:
 
   run-migrations:
     docker:
-      - image: handuy1992/new
+      - image: handuy1992/new:v1
     steps:
       # Checkout code from git
       - checkout
@@ -252,7 +252,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: handuy1992/new
+      - image: handuy1992/new:v1
     steps:
       # Checkout code from git
       - checkout
@@ -284,7 +284,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: handuy1992/new
+      - image: handuy1992/new:v1
     steps:
       # Checkout code from git
       - checkout
@@ -313,7 +313,7 @@ jobs:
 
   smoke-test:
     docker:
-      - image: handuy1992/new
+      - image: handuy1992/new:v1
     steps:
       # Checkout code from git
       - checkout
