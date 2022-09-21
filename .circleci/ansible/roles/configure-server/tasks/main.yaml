@@ -5,25 +5,13 @@
   apt:
     update_cache: yes
 
-- name: Install nodejs, npm 1
-  command: curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh -o install_nvm.sh
+- name: curl nvm
+  command: curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
-- name: Install nodejs, npm 2
-  command: bash install_nvm.sh
+- name: source profile
+  command: source ~/.bashrc
 
-- name: Install nodejs, npm 3
-  command: export NVM_DIR="$HOME/.nvm"
-
-- name: Install nodejs, npm 4
-  command: [ -s "$NVM_DIR/nvm.sh" ] 
-
-- name: Install nodejs, npm 5
-  command: \. "$NVM_DIR/nvm.sh" 
-
-- name: Install nodejs, npm 6
-  command: source ~/.bash_profile
-
-- name: Install nodejs, npm 7
+- name: Install nodejs, npm
   command: nvm install 12.16
 
 - name: "install pm2"
