@@ -144,7 +144,7 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      - image: handuy1992/full_pack
+      - image: handuy1992/new
     steps:
       # Checkout code from git
       - checkout
@@ -189,7 +189,7 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: handuy1992/full_pack
+      - image: handuy1992/new
     steps:
       - run:
           name: Check Dependencies
@@ -221,11 +221,6 @@ jobs:
       - run:
           name: Configure server
           command: |
-            # Your code here
-              env
-              env >> test.txt
-              cat test.txt
-
               cd .circleci/ansible
               ansible-playbook -i /tmp/workspace/project/.circleci/ansible/inventory.txt configure-server.yml
       # Here's where you will add some code to rollback on failure  
@@ -233,7 +228,7 @@ jobs:
 
   run-migrations:
     docker:
-      - image: handuy1992/full_pack
+      - image: handuy1992/new
     steps:
       # Checkout code from git
       - checkout
@@ -257,7 +252,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: handuy1992/full_pack
+      - image: handuy1992/new
     steps:
       # Checkout code from git
       - checkout
@@ -289,7 +284,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: handuy1992/full_pack
+      - image: handuy1992/new
     steps:
       # Checkout code from git
       - checkout
@@ -318,7 +313,7 @@ jobs:
 
   smoke-test:
     docker:
-      - image: handuy1992/full_pack
+      - image: handuy1992/new
     steps:
       # Checkout code from git
       - checkout
