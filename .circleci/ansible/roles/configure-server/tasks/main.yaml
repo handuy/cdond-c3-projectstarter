@@ -5,16 +5,26 @@
   apt:
     update_cache: yes
 
-- name: Install nodejs, npm
-  command: "{{ item }}"
-  with_items:
-    - curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh -o install_nvm.sh
-    - bash install_nvm.sh
-    - "export NVM_DIR=$HOME/.nvm"
-    - "[ -s $NVM_DIR/nvm.sh ] && \. $NVM_DIR/nvm.sh"
-    - "[ -s $NVM_DIR/bash_completion ] && \. $NVM_DIR/bash_completion"
-    - source ~/.bash_profile
-    - nvm install 12.16
+- name: Install nodejs, npm 1
+  command: curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh -o install_nvm.sh
+
+- name: Install nodejs, npm 2
+  command: bash install_nvm.sh
+
+- name: Install nodejs, npm 3
+  command: export NVM_DIR="$HOME/.nvm"
+
+- name: Install nodejs, npm 4
+  command: [ -s "$NVM_DIR/nvm.sh" ] 
+
+- name: Install nodejs, npm 5
+  command: \. "$NVM_DIR/nvm.sh" 
+
+- name: Install nodejs, npm 6
+  command: source ~/.bash_profile
+
+- name: Install nodejs, npm 7
+  command: nvm install 12.16
 
 - name: "install pm2"
   become: true
