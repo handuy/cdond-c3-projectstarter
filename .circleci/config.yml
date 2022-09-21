@@ -35,11 +35,11 @@ commands:
 jobs:
   build-frontend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/node:12.16
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build-1]
+          keys: [frontend-build-2]
       - run:
           name: Build front-end
           command: |
@@ -51,15 +51,15 @@ jobs:
             npm run build
       - save_cache:
           paths: [frontend/node_modules]
-          key: frontend-build-1
+          key: frontend-build-2
 
   build-backend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/node:12.16
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build-1]
+          keys: [backend-build-2]
       - run:
           name: Back-end build
           command: |
@@ -68,17 +68,17 @@ jobs:
             npm run build
       - save_cache:
           paths: [backend/node_modules]
-          key: backend-build-1
+          key: backend-build-2
 
   test-frontend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/node:12.16
     steps:
       # Checkout code from git
       - checkout
       # Restore from cache
       - restore_cache:
-          keys: [frontend-build-1]
+          keys: [frontend-build-2]
       # Your job code here
       - run:
           name: Front-end test
@@ -89,13 +89,13 @@ jobs:
                 
   test-backend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/node:12.16
     steps:
       # Checkout code from git
       - checkout
       # Restore from cache
       - restore_cache:
-          keys: [backend-build-1]
+          keys: [backend-build-2]
       # Your job code here
       - run:
           name: Back-end test
@@ -106,13 +106,13 @@ jobs:
             
   scan-frontend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/node:12.16
     steps:
       # Checkout code from git
       - checkout
       # Restore from cache
       - restore_cache:
-          keys: [frontend-build-1]
+          keys: [frontend-build-2]
       # Your job code here
       - run:
           name: Front-end test
@@ -125,13 +125,13 @@ jobs:
 
   scan-backend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/node:12.16
     steps:
       # Checkout code from git
       - checkout
       # Restore from cache
       - restore_cache:
-          keys: [backend-build-1]
+          keys: [backend-build-2]
       # Your job code here
       - run:
           name: Back-end test
@@ -144,7 +144,7 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      - image: handuy1992/full_package:v1
+      - image: handuy1992/full_pack
     steps:
       # Checkout code from git
       - checkout
@@ -189,7 +189,7 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: handuy1992/full_package:v1
+      - image: handuy1992/full_pack
     steps:
       - run:
           name: Check Dependencies
@@ -233,7 +233,7 @@ jobs:
 
   run-migrations:
     docker:
-      - image: handuy1992/full_package:v1
+      - image: handuy1992/full_pack
     steps:
       # Checkout code from git
       - checkout
@@ -256,7 +256,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: handuy1992/full_package:v1
+      - image: handuy1992/full_pack
     steps:
       # Checkout code from git
       - checkout
@@ -288,7 +288,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: handuy1992/full_package:v1
+      - image: handuy1992/full_pack
     steps:
       # Checkout code from git
       - checkout
@@ -317,7 +317,7 @@ jobs:
 
   smoke-test:
     docker:
-      - image: handuy1992/full_package:v1 
+      - image: handuy1992/full_pack
     steps:
       # Checkout code from git
       - checkout
