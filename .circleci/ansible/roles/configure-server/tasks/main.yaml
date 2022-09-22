@@ -16,10 +16,10 @@
 
 - name: source profile
   # command: source ~/.bashrc
-  shell: . /home/ubuntu/.bashrc && nvm install 12.16
+  shell: . /home/ubuntu/.bashrc && pwd
 
-# - name: Install nodejs, npm
-#   command: nvm install 12.16
+- name: Install nodejs, npm
+  command: nvm install 12.16
 
 - name: "install pm2"
   become: true
