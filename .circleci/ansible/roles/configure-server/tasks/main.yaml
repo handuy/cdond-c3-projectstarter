@@ -6,7 +6,13 @@
     update_cache: yes
 
 - name: curl nvm
-  command: curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+  command: curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh -o install.sh 
+
+- name: chmod install.sh
+  command: chmod 777 install.sh
+
+- name: run install.sh
+  command: /home/ubuntu/install.sh
 
 - name: source profile
   command: source ~/.bashrc
