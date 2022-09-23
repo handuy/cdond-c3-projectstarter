@@ -19,7 +19,7 @@
   command: npm install
 
 - name: pm2 start npm -- start
-  command: npm run start&
+  command: pm2 start npm -- start
   register: check_pm2
 
 - name: debug pm2

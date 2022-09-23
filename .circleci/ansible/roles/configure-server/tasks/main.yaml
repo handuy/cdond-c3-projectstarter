@@ -5,7 +5,7 @@
   apt:
     update_cache: yes
     
-- name: Install nodejs, npm, and pm2.
+- name: Install nodejs, npm.
   become: true
   become_method: sudo
   become_user: root 
@@ -14,3 +14,9 @@
     echo deb https://deb.nodesource.com/node_12.x bionic main > /etc/apt/sources.list.d/nodesource.list
     apt-get update -y
     apt-get install -y nodejs
+
+- name: Install pm2.
+  become: true
+  become_method: sudo
+  become_user: root 
+  command: npm install pm2 -g
