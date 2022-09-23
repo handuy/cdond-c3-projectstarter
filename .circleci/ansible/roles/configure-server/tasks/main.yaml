@@ -15,5 +15,3 @@
     - echo deb https://deb.nodesource.com/node_12.x bionic main > /etc/apt/sources.list.d/nodesource.list
     - apt-get update -y
     - apt-get install -y nodejs
-    - node -v
-    - npm install pm2 -g
