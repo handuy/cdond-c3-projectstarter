@@ -300,8 +300,7 @@ jobs:
             env
 
             cd backend
-            npm i
-            npm run build
+            
             echo "TYPEORM_CONNECTION=postgres" >> .env
             echo "TYPEORM_MIGRATIONS_DIR=./src/migrations" >> .env
             echo "TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts" >> .env
@@ -311,6 +310,9 @@ jobs:
             echo "TYPEORM_USERNAME=duynh23" >> .env
             echo "TYPEORM_PASSWORD=push112358" >> .env
             echo "TYPEORM_DATABASE=duynh23" >> .env
+
+            npm i
+            npm run build
 
             cd ..
             # Zip the directory
