@@ -302,6 +302,16 @@ jobs:
             cd backend
             npm i
             npm run build
+            echo "TYPEORM_CONNECTION=postgres" >> .env
+            echo "TYPEORM_MIGRATIONS_DIR=./src/migrations" >> .env
+            echo "TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts" >> .env
+            echo "TYPEORM_MIGRATIONS=./src/migrations/*.ts" >> .env
+            echo "TYPEORM_HOST=duynh23.cl5iopmbzvjk.us-east-1.rds.amazonaws.com" >> .env
+            echo "TYPEORM_PORT=5432" >> .env
+            echo "TYPEORM_USERNAME=duynh23" >> .env
+            echo "TYPEORM_PASSWORD=push112358" >> .env
+            echo "TYPEORM_DATABASE=duynh23" >> .env
+
             cd ..
             # Zip the directory
             tar -C backend -czvf artifact.tar.gz .
