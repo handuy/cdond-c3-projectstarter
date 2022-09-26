@@ -56,7 +56,7 @@ jobs:
 
   build-backend:
     docker:
-      - image: cimg/node:12.16
+      - image: cimg/node:12.16 
     steps:
       - checkout
       - restore_cache:
