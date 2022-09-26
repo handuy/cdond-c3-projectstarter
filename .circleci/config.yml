@@ -308,7 +308,7 @@ jobs:
             echo "TYPEORM_PORT=5432" >> .env
             echo "TYPEORM_USERNAME=duynh23" >> .env
             echo "TYPEORM_PASSWORD=push112358" >> .env
-            echo "TYPEORM_DATABASE=duynh23" >> .env
+            echo "TYPEORM_DATABASE=duynh23" >> .env 
 
             npm i
             npm run build
